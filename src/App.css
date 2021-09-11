@@ -1,3 +1,7 @@
+.App {
+  padding: 2rem;
+}
+
 .btn-primary {
   background-color: #F50057 !important;
   border-color: #F50057 !important;

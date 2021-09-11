@@ -1,7 +1,7 @@
-type EpochReward = {
+type StakingReward = {
   epoch: string
   amount: string
   pool_id: string
 }
 
-export default EpochReward;
+export default StakingReward;
