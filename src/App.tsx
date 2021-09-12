@@ -17,7 +17,7 @@ const App = (): ReactElement => {
 					<Route exact path="/">
 						<Home />
 					</Route>
-					<Route path="/faq">
+					<Route exact path="/faq">
 						<Faq />
 					</Route>
 				</Switch>
