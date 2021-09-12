@@ -11,10 +11,13 @@ interface TaxBreakdownProps {
 const LOVELACE_IN_ADA = 1000000;
 
 const TaxBreakdown: React.FC<TaxBreakdownProps> = ({ rewards }): ReactElement => {
-	const [total, setTotal] = useState(0);
+	const [totalAud, setTotalAud] = useState(0);
+	const [totalAda, setTotalAda] = useState(0);
 	useEffect(() => {
-		const amounts = rewards.map(reward => (reward.amount / LOVELACE_IN_ADA * reward.price));
-		setTotal(sum(amounts));
+		const audSum = rewards.map(reward => (reward.amount / LOVELACE_IN_ADA * reward.price));
+		const adaSum = rewards.map(reward => (reward.amount / LOVELACE_IN_ADA));
+		setTotalAud(sum(audSum));
+		setTotalAda(sum(adaSum));
 	}, []);
 	return (
 		<Container className="mt-4 px-0">
@@ -37,8 +40,8 @@ const TaxBreakdown: React.FC<TaxBreakdownProps> = ({ rewards }): ReactElement =>
 					))}
 					<tr>
 						<td></td>
-						<td></td>
-						<td>${total.toFixed(2)}</td>
+						<td>{totalAda.toFixed(2)} ₳</td>
+						<td>${totalAud.toFixed(2)}</td>
 					</tr>
 				</tbody>
 			</Table>

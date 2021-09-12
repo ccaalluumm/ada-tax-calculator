@@ -33,8 +33,8 @@ const Home = (): ReactElement => {
 
 	const handleOnClick = async () => {
 		setLoading(true);
-		const data = await calculateStakingRewards();
-		await Promise.all<AdaRewards>(data)
+		const stakingRewards = await calculateStakingRewards();
+		await Promise.all<AdaRewards>(stakingRewards)
 			.then((rewards) => setRewards(rewards))
 			.catch(err => setErrorMessage(err));
 		setLoading(false);
@@ -46,7 +46,7 @@ const Home = (): ReactElement => {
 
 	return (
 		<Container>
-			<h1>Ada Tax Calculator</h1>
+			<h1>Staking Rewards Calculator</h1>
 			<Form>
 				<Form.Group className="mb-3">
 					<Form.Label>Rewards Address</Form.Label>
