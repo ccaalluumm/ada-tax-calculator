@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react';
 import BootstrapNavbar from 'react-bootstrap/Navbar';
 import BootstrapNav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
+import { LinkContainer }from 'react-router-bootstrap';
 
 const Navbar = (): ReactElement => {
 	return (
@@ -9,8 +10,12 @@ const Navbar = (): ReactElement => {
 			<BootstrapNavbar>
 				<Container>
 					<BootstrapNav>
-						<BootstrapNav.Link href="/">Home</BootstrapNav.Link>
-						<BootstrapNav.Link href="/faq">FAQ</BootstrapNav.Link>
+						<LinkContainer to="/">
+							<BootstrapNav.Link >Home</BootstrapNav.Link>
+						</LinkContainer>
+						<LinkContainer to="/faq">
+							<BootstrapNav.Link>FAQ</BootstrapNav.Link>
+						</LinkContainer>
 					</BootstrapNav>
 				</Container>
 			</BootstrapNavbar>
