@@ -46,7 +46,7 @@ const Home = (): ReactElement => {
 
 	return (
 		<Container>
-			<h1>Staking Rewards Calculator</h1>
+			<h1 className="mb-4">Staking Rewards Calculator</h1>
 			<Form>
 				<Form.Group className="mb-3">
 					<Form.Label>Rewards Address</Form.Label>

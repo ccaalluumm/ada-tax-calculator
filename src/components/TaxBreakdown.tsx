@@ -21,7 +21,7 @@ const TaxBreakdown: React.FC<TaxBreakdownProps> = ({ rewards }): ReactElement =>
 	}, []);
 	return (
 		<Container className="mt-4 px-0">
-			<h1 className="mb-4">Staking Rewards</h1>
+			<h1 className="mb-4">Rewards History</h1>
 			<Table striped bordered hover>
 				<thead>
 					<tr>
@@ -39,9 +39,9 @@ const TaxBreakdown: React.FC<TaxBreakdownProps> = ({ rewards }): ReactElement =>
 						</tr>
 					))}
 					<tr>
-						<td></td>
-						<td>{totalAda.toFixed(2)} ₳</td>
-						<td>${totalAud.toFixed(2)}</td>
+						<td>Total</td>
+						<td><b>{totalAda.toFixed(2)} ₳</b></td>
+						<td><b>${totalAud.toFixed(2)}</b></td>
 					</tr>
 				</tbody>
 			</Table>
