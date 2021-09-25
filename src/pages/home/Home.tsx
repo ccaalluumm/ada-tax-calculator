@@ -44,35 +44,51 @@ const Home = (): ReactElement => {
 		setRewardsAddress(e.target.value);
 	};
 
+	const handleOnReset = () => {
+		setRewardsAddress('');
+		setErrorMessage('');
+		setLoading(false);
+		setRewards([]);
+	};
+
 	return (
 		<Container>
-			<h1 className="mb-4">Staking Rewards Calculator</h1>
-			<Form>
-				<Form.Group className="mb-3">
-					<Form.Label>Rewards Address</Form.Label>
-					{errorMessage && (
-						<Alert variant="danger">
-							<Alert.Heading>Oops! You got an error!</Alert.Heading>
-							<p>{errorMessage}</p>
-						</Alert>
-					)}
-					<Form.Control
-						type="rewardsAddress"
-						value={rewardsAddress}
-						onChange={handleOnChange}
-						placeholder="e.g. stake1234"
-						className="mb-2"
-					/>
-					<Form.Text className="text-muted">
-            If you need help finding this, head to the FAQ section.
-					</Form.Text>
-				</Form.Group>
-				<Button variant="primary" type="button" onClick={() => handleOnClick()} disabled={loading}>
-          Calculate
-				</Button>
-			</Form>
+			{rewards.length === 0 && (
+				<>
+					<h1 className="mb-4">Staking Rewards Calculator</h1>
+					<Form>
+						<Form.Group className="mb-3">
+							<Form.Label>Rewards Address</Form.Label>
+							{errorMessage && (
+								<Alert variant="danger">
+									<Alert.Heading>Oops! You got an error!</Alert.Heading>
+									<p>{errorMessage}</p>
+								</Alert>
+							)}
+							<Form.Control
+								type="rewardsAddress"
+								value={rewardsAddress}
+								onChange={handleOnChange}
+								placeholder="e.g. stake1234"
+								className="mb-2"
+							/>
+							<Form.Text className="text-muted">
+								If you need help finding this, head to the FAQ section.
+							</Form.Text>
+						</Form.Group>
+						<Button variant="primary" type="button" onClick={() => handleOnClick()} disabled={loading}>
+							Calculate
+						</Button>
+					</Form>
+				</>
+			)}
 			{rewards.length !== 0 && (
-				<TaxBreakDown rewards={rewards} />
+				<>
+					<TaxBreakDown rewards={rewards} />
+					<Button variant="primary" type="button" onClick={() => handleOnReset()} disabled={loading}>
+						Reset
+					</Button>
+				</>
 			)}
 		</Container>
 	);
