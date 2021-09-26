@@ -23,7 +23,7 @@ This is the number that you will declare on your tax return.
 
 \b
 
-## An Example
+## Can You Give Me An Example?
 
 For the first epoch, you earned 10 ADA, which when paid to your wallet was valued at $1 per ADA. Thus, for epoch 1, your declared income would be $10.
 
@@ -35,7 +35,7 @@ This is the whole point of this calculator; it is a common mistake for people to
 
 \b
 
-## How Are Rewards Calculated
+## How Are Rewards Calculated?
 
 First, the rewards history of the provided address is retrieved. This history will contain all of the rewards you have recieved, including the epoch you received the reward, and how much ADA was rewarded.
 Using this history, for every staking reward paid, the value of ADA (in AUD) at the time you receivedthe reward is multiplied by the amount of ADA you earned.
@@ -53,7 +53,7 @@ To find your rewards address on Daedalus, open the delegation center tab, locate
 ![DaedalusWalletStaking](/daedalus_staking.png)
 
 \b
-## Capital Gains
+## What About Capital Gains?
 
 If you ever sell your ADA earned through staking rewards, this will trigger a capital gain event.
 
@@ -62,6 +62,8 @@ In essense, the same way we must calculate the value of each reward individually
 You must declare either a capital **loss** or a capital **gain**.
 
 This will depend on whether or not you sell your reward for more or less than it was worth than when you earned it.
+
+Functionality to calculate this is currently in development...
 `;
 
 export default FaqContent;

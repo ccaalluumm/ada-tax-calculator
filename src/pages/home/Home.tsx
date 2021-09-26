@@ -4,37 +4,23 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import AdaRewards from '../../types/AdaRewards';
-import getAdaPrice from '../../api/getAdaPrice';
-import getEpochDetails from '../../api/getEpochDetails';
-import unixTimestampeToDatetime from '../../utils/unixToDateTime';
 import TaxBreakDown from '../../components/TaxBreakdown';
-import getStakingHistroy from '../../api/getStakingHistory';
-import StakingReward from '../../types/StakingReward';
+import calculateStakingRewards from '../../functions/calculateStakingRewards';
+import LoadingModal from '../../components/LoadingModal';
+import filterRewardsByYear from '../../functions/filterRewardsByYear';
 
 const Home = (): ReactElement => {
 	const [rewardsAddress, setRewardsAddress] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [rewards, setRewards] = useState([] as AdaRewards[]);
+	const [financialYear, setFinancialYear] = useState('2021');
 
-	const calculateStakingRewards = async () => {
-		return await getStakingHistroy(rewardsAddress)
-			.then(resp => resp.data)
-			.then(stakingHistory => {
-				return stakingHistory.map(async function getEpochEndTime(stakingReward: StakingReward) {
-					const rewardPayDate = await getEpochDetails(stakingReward.epoch+1).then(resp => resp.data.start_time).catch(err => setErrorMessage(err.response.data.message));
-					const adaPriceOnPayDate = await getAdaPrice(unixTimestampeToDatetime(rewardPayDate)).then(resp => resp.data.market_data.current_price.aud).catch(err => setErrorMessage(err.response.data.message));
-
-					return {epoch: stakingReward.epoch, amount: parseInt(stakingReward.amount), rewardPayDate: rewardPayDate, price: adaPriceOnPayDate};
-				});
-			})
-			.catch(err => setErrorMessage(err.response.data.message));
-	};
-
-	const handleOnClick = async () => {
+	const handleOnClickCalculate = async () => {
 		setLoading(true);
-		const stakingRewards = await calculateStakingRewards();
+		const stakingRewards = await calculateStakingRewards(rewardsAddress, setErrorMessage);
 		await Promise.all<AdaRewards>(stakingRewards)
+			.then((rewards) => filterRewardsByYear(financialYear, rewards))
 			.then((rewards) => setRewards(rewards))
 			.catch(err => setErrorMessage(err));
 		setLoading(false);
@@ -42,6 +28,10 @@ const Home = (): ReactElement => {
 
 	const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setRewardsAddress(e.target.value);
+	};
+
+	const handleOnChangeFinancialYear = (e: ChangeEvent<HTMLSelectElement>) => {
+		setFinancialYear(e.target.value);
 	};
 
 	const handleOnReset = () => {
@@ -53,6 +43,9 @@ const Home = (): ReactElement => {
 
 	return (
 		<Container>
+			{loading && (
+				<LoadingModal isLoading={loading}/>
+			)}
 			{rewards.length === 0 && (
 				<>
 					<h1 className="mb-4">Staking Rewards Calculator</h1>
@@ -70,13 +63,26 @@ const Home = (): ReactElement => {
 								value={rewardsAddress}
 								onChange={handleOnChange}
 								placeholder="e.g. stake1234"
-								className="mb-2"
+								className="mb-2 w-50"
 							/>
+							{/*
 							<Form.Text className="text-muted">
 								If you need help finding this, head to the FAQ section.
 							</Form.Text>
+							*/}
+							<Form.Label>Financial Year</Form.Label>
+							<Form.Select
+								as="select"
+								aria-label="Fiscal year"
+								value={financialYear}
+								onChange={handleOnChangeFinancialYear}
+								className="w-auto"
+							>
+								<option value="2021">2021</option>
+								<option value="2022">2022</option>
+							</Form.Select>
 						</Form.Group>
-						<Button variant="primary" type="button" onClick={() => handleOnClick()} disabled={loading}>
+						<Button variant="primary" type="button" onClick={() => handleOnClickCalculate()} disabled={loading} className="mt-2">
 							Calculate
 						</Button>
 					</Form>

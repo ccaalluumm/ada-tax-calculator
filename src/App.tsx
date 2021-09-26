@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 
 import './App.css';
 import Navbar from './components/Navbar';
@@ -14,10 +14,19 @@ const App = (): ReactElement => {
 			<Navbar />
 			<div className="App">
 				<Switch>
-					<Route exact path="/">
+					<Route
+						exact
+						path="/"
+						render={() => {
+							return (
+								<Redirect to="/calculator" />
+							);
+						}}
+					/>
+					<Route exact path="/calculator">
 						<Home />
 					</Route>
-					<Route exact path="/faq">
+					<Route path="/faq">
 						<Faq />
 					</Route>
 				</Switch>

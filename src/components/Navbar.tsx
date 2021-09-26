@@ -10,8 +10,8 @@ const Navbar = (): ReactElement => {
 			<BootstrapNavbar>
 				<Container>
 					<BootstrapNav>
-						<LinkContainer to="/">
-							<BootstrapNav.Link >Home</BootstrapNav.Link>
+						<LinkContainer to="/calculator">
+							<BootstrapNav.Link >Calculator</BootstrapNav.Link>
 						</LinkContainer>
 						<LinkContainer to="/faq">
 							<BootstrapNav.Link>FAQ</BootstrapNav.Link>

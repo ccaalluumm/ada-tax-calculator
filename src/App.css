@@ -3,6 +3,28 @@
 }
 
 .btn-primary {
-  background-color: #f50072 !important;
-  border-color: #f50077 !important;
+  background-color: #ff5858 !important;
+  border-color: #ff5858 !important;
+}
+
+.navbar {
+  background: linear-gradient(to right, #ff5858, #f857a6);
+}
+
+a.active.nav-link {
+  color: white !important;
+}
+
+a.nav-link {
+  color: rgba(255, 255, 255, 0.671) !important;
+}
+
+.loading-modal .modal-content {
+  background-color: transparent;
+  border: none;
+}
+
+.loading-modal .modal-dialog {
+  height: 100%;
+  display: flex;
 }
