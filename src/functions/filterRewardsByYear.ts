@@ -1,8 +1,9 @@
+import { financialYears } from '../constants';
 import AdaRewards from '../types/AdaRewards';
-import unixTimestampGetYear from '../utils/unixTimestampGetYear';
+import unixTimestampeToDatetime from '../utils/unixToDateTime';
 
-const filterRewardsByYear = (year: string, rewards: AdaRewards[]): AdaRewards[] => {
-	return rewards.filter(reward => unixTimestampGetYear(reward.reward_pay_date) === parseInt(year));
+const filterRewardsByFinancialYear = (year: string, rewards: AdaRewards[]): AdaRewards[] => {
+	return rewards.filter(reward => unixTimestampeToDatetime(reward.reward_pay_date) >= financialYears[year].start_date && unixTimestampeToDatetime(reward.reward_pay_date) <= financialYears[year].end_date);
 };
 
-export default filterRewardsByYear;
+export default filterRewardsByFinancialYear;
