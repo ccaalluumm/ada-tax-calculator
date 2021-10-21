@@ -7,7 +7,7 @@ import AdaRewards from '../../types/AdaRewards';
 import TaxBreakDown from '../../components/TaxBreakdown';
 import calculateStakingRewards from '../../functions/calculateStakingRewards';
 import LoadingModal from '../../components/LoadingModal';
-import filterRewardsByYear from '../../functions/filterRewardsByYear';
+import filterRewardsByYear from '../../functions/filterRewardsByFinancialYear';
 
 const Home = (): ReactElement => {
 	const [rewardsAddress, setRewardsAddress] = useState('');
@@ -65,12 +65,10 @@ const Home = (): ReactElement => {
 								placeholder="e.g. stake1234"
 								className="mb-2 w-50"
 							/>
-							{/*
 							<Form.Text className="text-muted">
 								If you need help finding this, head to the FAQ section.
 							</Form.Text>
-							*/}
-							<Form.Label>Financial Year</Form.Label>
+							<Form.Label className="d-block mt-3">Financial Year</Form.Label>
 							<Form.Select
 								as="select"
 								aria-label="Fiscal year"
@@ -92,7 +90,7 @@ const Home = (): ReactElement => {
 				<>
 					<TaxBreakDown rewards={rewards} />
 					<Button variant="primary" type="button" onClick={() => handleOnReset()} disabled={loading}>
-						Reset
+						Clear
 					</Button>
 				</>
 			)}
