@@ -10,10 +10,10 @@ const calculateStakingRewards = async (rewardsAddress: string, errorCallback: (m
 		.then(resp => resp.data)
 		.then(stakingHistory => {
 			return stakingHistory.map(async function getEpochEndTime(stakingReward: StakingReward) {
-				const rewardPayDate = await getEpochDetails(stakingReward.epoch+1).then(resp => resp.data.start_time).catch(err => errorCallback(err.response.data.message));
+				const rewardPayDate = await getEpochDetails(stakingReward.epoch+2).then(resp => resp.data.start_time).catch(err => errorCallback(err.response.data.message));
 				const adaPriceOnPayDate = await getAdaPrice(unixTimestampeToDatetime(rewardPayDate)).then(resp => resp.data.market_data.current_price.aud).catch(err => errorCallback(err.response.data.message));
 
-				return {epoch: stakingReward.epoch, amount: parseInt(stakingReward.amount), reward_pay_date: rewardPayDate, price: adaPriceOnPayDate};
+				return { epoch: stakingReward.epoch, amount: parseInt(stakingReward.amount), reward_pay_date: rewardPayDate, price: adaPriceOnPayDate };
 			});
 		})
 		.catch(err => errorCallback(err.response.data.message));

@@ -7,9 +7,9 @@ const FaqContent = `
 
 The ATO classes staking rewards income. See [here](https://www.ato.gov.au/general/gen/tax-treatment-of-crypto-currencies-in-australia---specifically-bitcoin/?page=2#Stakingrewardsandairdrops).
 
-This means that at tax time you need to declare your staking rewards that you earned during the fiscal year. The value you declare will be an AUD amount.
+This means that at tax time you need to declare your staking rewards that you earned during the financial year. The value you declare will be an AUD converted amount.
 
-The formula used for calculation is not straightforward.
+The formula used for calculation is not straightforward, but otherwise simple.
 
 The ATO evaluates the **total value** of your staking rewards using the value of those rewards at the **time you received them**.
 
@@ -40,9 +40,10 @@ This is the whole point of this calculator; it is a common mistake for people to
 First, the rewards history of the provided address is retrieved. This history will contain all of the rewards you have recieved, including the epoch you received the reward, and how much ADA was rewarded.
 Using this history, for every staking reward paid, the value of ADA (in AUD) at the time you receivedthe reward is multiplied by the amount of ADA you earned.
 
-How is the value of ADA calculated at the time of receival?
-When you earn rewards from staking your ADA, you receive the rewards at the beginning of the next epoch.
-Using an example, if you were to earn 10 ADA from epoch 100, you would receive that ADA at the beginning of epoch 101. Therefore, the value of your rewards are calculated by retrieving the value of ADA at the begging of the epoch after you earned your reward.
+## How is the value of ADA calculated at the time of receival?
+
+When you earn rewards from staking your ADA you receive the rewards at the beginning of the epoch after the next.
+Using an example, if you were to earn 10 ADA from epoch 100, you would receive that ADA at the beginning of epoch 102. Therefore, the value of your epoch reward is evaluated 2 epochs into the future.
 
 \b
 

@@ -89,7 +89,7 @@ const Home = (): ReactElement => {
 			{rewards.length !== 0 && (
 				<>
 					<TaxBreakDown rewards={rewards} />
-					<Button variant="primary" type="button" onClick={() => handleOnReset()} disabled={loading}>
+					<Button variant="primary" type="button" onClick={() => handleOnReset()} disabled={loading} className="mt-3" >
 						Clear
 					</Button>
 				</>
